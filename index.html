@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TATA</title>
+    <!--영어폰트-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <!--한글폰트-->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&display=swap');
+    </style>
+<style>
+    /*헤더밑에 메뉴오게 하고싶고 -> 자바스크립이라서 지금은 x=> css에서 100vw, 100vh : viewport !
+     h2태그밑으로 사진들 보내고 싶다 -> h2와 사진들 영역 구분, 사진들에 플렉스 걸기*/
+    /*초기화*/
+    * {margin:0; padding:0}
+    
+    /*wrapper*/
+    #wrapper {width: 100%; }
+    h2 {width: 100px;display:block;padding-top: 50px;margin-bottom: 20px;
+        font-family: 'IBM Plex Sans KR', sans-serif;font-style: italic;}
+    a {text-decoration: none; color:black}
+    i {display:block;margin-bottom:20px;}
+    
+    /*header*/
+    #header_top {
+        height: 100vh;
+        font-size: 60px; 
+        background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+                          url(./images/실내이벤트/header-top-img.jpg);
+        background-size:cover;
+        margin: 0 auto;
+        text-align: center;
+        }
+    #header_top div{
+        position: relative;
+        display: inline-block;
+        }
+
+    span {
+        display: flex;
+        margin-top:50vh;
+        cursor: pointer;
+        text-shadow:2px 2px 0.5px ghostwhite;
+        font-family: 'Anton', sans-serif;font-style: italic;
+        }
+    
+        /*마우스 대면 어서오세요 하는 말풍선 생기면 좋겠다*/
+   
+        .arrow_box {
+        display: none;
+        position: absolute;
+        width: 100px;
+        padding: 8px;
+        left: 0;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        background: #333;
+        color: #fff;
+        font-size: 14px;font-family: 'IBM Plex Sans KR', sans-serif;font-style: italic;
+        }
+
+        .arrow_box:after {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        margin-left: -10px;
+        border: solid transparent;
+        border-color: rgba(51, 51, 51, 0);
+        border-bottom-color: #333;
+        border-width: 10px;
+        pointer-events: none;
+        content: '';}
+  
+        span:hover + .arrow_box {display: block;}
+    
+    /*로컬목록*/
+    #lnb {box-shadow:0 3px 3px rgba(150,150,150,0.5);
+        position: fixed; left: 0; top: 0; width: 100%;}
+    #lnb ul{font-size:0; line-height: 0; }
+    #lnb li{display: inline-block; vertical-align: top; width: 25%; padding: 20px 0; 
+        font-size: 25px; text-align: center;background-color: white;}
+    #lnb a {padding:10px 100px;font-family: 'Anton', sans-serif;font-style: italic;}
+    #lnb a:hover {color: white;font-size: 26px;text-shadow: 1px 1px 0.5px black;}
+    
+    /*contents*/
+    section {width: 960px;margin:0 auto;}
+    i {font-family: 'IBM Plex Sans KR', sans-serif;font-style: italic;}
+    
+    /*home*/
+    #home {margin: 0 auto;display: flex;}
+    #home div{flex-direction: row;}
+    #home div:first-child {padding:200px 0;margin-right: 30px;}
+    #home div:last-child {padding: 450px 0;}
+    #home img {width:100%;margin-top: 10px; ;}
+    #home p {font-family: 'IBM Plex Sans KR', sans-serif;font-style: italic;}
+    
+    /*메뉴*/
+    #menu_back {
+        background-image: url(./images/실내이벤트/테이블의자2.jpg);
+        background-size: cover;
+        background-position: center;
+    }
+    
+    /*메뉴-사이드바*/
+    #menu_img {border: 1px solid black;}
+    /*샌드위치*/
+    input:nth-of-type(1) {display: none;}
+    input:nth-of-type(1)~div:nth-of-type(1){display: none;}
+    input:nth-of-type(1):checked~div:nth-of-type(1){display: block;}
+    /*드링크*/
+    input:nth-of-type(2) {display: none;}
+    input:nth-of-type(2)~div:nth-of-type(2){display: none;}
+    input:nth-of-type(2):checked~div:nth-of-type(2){display: block;}
+    /*탭모양*/
+    aside.buttons {overflow: hidden;}
+    aside.buttons > label {
+                float:right;
+                display:block; 
+                width :200px ;height: 40px;
+                padding-bottom: 10px;
+                line-height: 30px;
+                text-align: left;
+                font-family: 'IBM Plex Sans KR', sans-serif;
+                font-style: italic; font-size: 20px;
+                cursor: pointer;
+        }
+    .menu_img:nth-of-type(2)>div>address{ opacity: 0; }
+
+    .menu_img {overflow: hidden; }
+    .menu_img>div{float: left; margin-right: 72px;}
+    .menu_img>div>img{width: 400px;}
+    .menu_img:nth-of-type(2)>div>i{opacity: 0;}
+
+    /*앨범*/
+    #album_img {display:flex;flex-wrap: wrap;}
+    #album_img div{flex: 1 40%;justify-content: space-around;}
+    #album_img>div>img{width: 400px;}
+    
+    /*이벤트*/
+    #event_img {display:flex;flex-wrap: wrap;}
+    #event_img div{flex: 1 40%;justify-content: space-around;}
+    #event_img>div>img{width: 400px;}
+    #event_img img {width: 400px;}
+    video {margin-bottom: 30px;width: 880px;}
+    
+    /* 페이지 top 부분 */ 
+    #top_btn {width:80px;
+                background:rgba(158, 156, 156, 0.3); /* 투명 배경 */ 
+                position:fixed;right:0px;bottom:100px;  /* 위치를 절대값으로 고정 */
+                text-align: center;
+                transform:rotate(-90deg);/* 반시계 방향 90도 회전 */
+                -webkit-transform:rotate(-90deg); /* 공급업체 접두어로 벤더프리픽스 적용 */
+                -ms-transform:rotate(-90deg);
+                border-radius: 10px; /* 모서리가 둥근 사각형, 박스 테두리 지정 */
+            }  
+    #top_btn a {text-decoration: none; font-family: 'IBM Plex Sans KR', sans-serif;
+            font-style: italic;font-weight: bold;color:black;}
+    /*footer*/
+    footer {background-color: lemonchiffon;
+            padding-top: 30px;box-sizing:border-box;
+            text-align: left; 
+             padding-left: 200px;height: 160px;
+            }
+    footer img {width: 14px;margin-top: 2px;margin: right 0 ;}
+    footer a {font-family: 'IBM Plex Sans KR', sans-serif;
+            font-weight: lighter;font-style: italic;
+            color:rgb(40, 39, 39);}
+    
+</style>
+</head>
+<body>
+    <div id="wrapper">
+    <header id="header_top">
+        <div>
+            <span id="header_title">TATA</span>
+            <p class="arrow_box">어서오세요!</p>
+        </div>
+    </header>
+    <div id="lnb">
+        <ul>
+            <li><a href="#home" >HOME</a></li>
+            <li><a href="#menu" >MENU</a></li>
+            <li><a href="#album" >ALBUM</a></li>
+            <li><a href="#event" >EVENT</a></li>
+        </ul>
+    </div>
+    <div id="contents">
+        <section id="home">
+            <div>
+                <img src="./images/누끼따기/오픈시간.jpg" alt="">
+            </div>
+            <div>
+                <h2>cafe TATA</h2>
+                <P>
+                조용한 분위기에서 <br/>
+                커피와 샌드위치를 즐기고 싶은 분이면<br/>
+                언제든 환영입니다<br/>
+                편안하게 즐기다 가세요 <br/>
+                </P>
+            </div>
+        </section>
+        <div id="menu_back">
+            <section id="menu">
+                <h2>MENU</h2>
+                <!--<div id="manu_bar">-->
+                    <input id="first" type="radio" name="tab" checked="checked"/>
+                    <input id="second" type="radio" name="tab">
+                    <aside class="buttons">
+                        <label for="first">SANDWICH</label>
+                        <label for="second">DRINK</label>
+                    </aside>
+                    <div class="menu_img">
+                        <div>
+                            <img src="./images/메뉴/꿀치즈햄샌드위치.jpg" alt=""><br/>
+                            <i>꿀치즈햄샌드위치</i>
+                        </div>
+                        <div>
+                            <img src="./images/메뉴/닭가슴살샌드위치.jpg" alt=""><br/>
+                            <i>닭가슴살샌드위치</i>
+                        </div>
+                        <div>
+                            <img src="./images/메뉴/바질머쉬룸샌드위치.jpg" alt=""><br/>
+                            <i>바질머쉬룸샌드위치</i>
+                        </div>
+                        <div>
+                            <img src="./images/메뉴/베이글샌드위치.jpg" alt=""><br/>
+                            <i>베이글샌드위치</i>
+                        </div>
+                        <div>
+                            <img src="./images/메뉴/베이컨치즈샌드위치.jpg" alt=""><br/>
+                            <i>베이컨치즈샌드위치</i>
+                        </div>
+                        <div >
+                            <img src="./images/메뉴/본레스햄포카치아.jpg" alt=""><br/>
+                            <i>본레스해포카치아</i>
+                        </div>
+                        <div >
+                            <img src="./images/메뉴/에그인헬.jpg" alt=""><br/>
+                            <i>에그인헬</i>
+                        </div>
+                        <div >
+                            <img src="./images/메뉴/풀드포크샌드위치.jpg" alt=""><br/>
+                            <i>폴드포크샌드위치</i>
+                        </div>
+                        <div >
+                            <img src="./images/메뉴/할라피뇨불고기파니니.jpg" alt=""><br/>
+                            <i>할라피뇨불고기파니니</i>
+                        </div>
+                    </div>
+                    <div class="menu_img">
+                        <div >
+                            <img src="./images/메뉴2/커피.jfif" alt=""><br/>
+                            <i>커피</i>
+                        </div>
+                        <div >
+                            <img src="./images/메뉴2/라떼.jfif" alt=""><br/>
+                            <i>라떼</i>
+                        </div>
+                        <div >
+                            <img src="./images/메뉴2/티.jpg" alt=""><br/>
+                            <i>티</i>
+                        </div>
+                        <div >
+                            <img src="./images/메뉴2/주스.jfif" alt=""><br/>
+                            <i>주스</i>
+                        </div>
+                        <div >
+                            <img src="./images/메뉴2/에이드.jpg" alt=""><br/>
+                            <i>에이드</i>
+                        </div>
+                        <div >
+                            <img src="./images/메뉴2/아더스.jpg" alt=""><br/>
+                            <i>아더스</i>
+                        </div>
+                    </div>
+                <!--</div>-->
+            </section>
+        </div>
+            <section id="album">
+                <h2>ALBUM</h2>
+                <div id="album_img">
+                    <div>
+                        <img src="./images/실내이벤트/무지개.jpg" alt=""><br/>
+                        <i>무지개</i>
+                    </div>
+                    <div>
+                        <img src="./images/실내이벤트/샌드위치라뗴.jpg" alt=""><br/>
+                        <i>샌드위치와 라떼</i>
+                    </div>
+                    <div>
+                        <img src="./images/실내이벤트/식물조명.jpg" alt=""><br/>
+                        <i>:)</i>
+                    </div>
+                    <div>
+                        <img src="./images/실내이벤트/실내장식.jpg" alt=""><br/>
+                        <i>가져가지 마세요 x) </i>
+                    </div>
+                </div>
+            </section>
+            <section id="event">
+                <h2>EVENT</h2>
+                <div id="event_img">
+                    <div>
+                        <img src="./images/실내이벤트/포스터2.jpg" alt=""><br/>
+                        <i>두번째 공연</i>
+                    </div>
+                    <div>
+                        <img src="./images/실내이벤트/포스터1.jpg" alt=""><br/>
+                        <i>첫번째공연</i>
+                    </div>
+                    <video width="100%" poster="./images/누끼따기/버스킹_Moment.jpg" autoplay loop controls>
+                        <source src="./images/실내이벤트/버스킹.mp4">
+                    </video>
+                </div>
+            </section>
+            <nav id="top_btn">
+                <a href="#header_top">Top</a>
+            </nav>
+    </div>
+    <footer>
+       <a href="https://map.naver.com/v5/entry/place/1625681336?c=14320572.5025724,4275529.3749416,13,0,0,0,dh&placePath=%2Fhome">
+        대구 수성구 지범로 248-12 1층<br/>
+        0507-1374-0822</a><br/>
+        <img src="./images/누끼따기/ico-sns-s-b.png" alt="">
+        <a href="http://www.instagram.com/tata__daegu">tata_daegu</a>
+    </footer>
+</div>
+
+</body>
+</html>
